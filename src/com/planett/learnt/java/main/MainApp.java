@@ -20,10 +20,9 @@ public class MainApp extends Application {
 
         // 获取Controller实例
         LoginController loginController = fxmlLoader.getController();
-
         Scene scene = new Scene(root);
 
-//        scene.getStylesheets().add(getClass().getResource("/com/planett/learnt/resources/login.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/com/planett/learnt/resources/login.css").toExternalForm());
         primaryStage.setTitle("Learn Together");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);

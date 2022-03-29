@@ -13,7 +13,7 @@ public class JdbcUtil {
     /*
      * 加载数据库
      * */
-    public static void loadClass() throws ClassNotFoundException {
+    public static void loadClass() throws ClassNotFoundException{
         Class.forName(DRIVER_CLASS);
     }
 
@@ -46,8 +46,7 @@ public class JdbcUtil {
     }
     /*
     * 检查数据唯一性*/
-    public boolean validate(String userName,String userPassword){
-        try {
+    public boolean validate(String userName,String userPassword) throws ClassNotFoundException, SQLException {
             JdbcUtil.loadClass();
             conn = JdbcUtil.getConn();
             System.out.println(conn);
@@ -60,12 +59,7 @@ public class JdbcUtil {
             while (rs.next()) {
                 return true;
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }finally {
-            close(rs,preparedStatement,conn);
-        }
-        return false;
+            return false;
     }
 
 }

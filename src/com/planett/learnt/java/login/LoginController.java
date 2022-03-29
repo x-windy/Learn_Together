@@ -3,19 +3,23 @@ package com.planett.learnt.java.login;
 import com.planett.learnt.Util.JdbcUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class LoginController {
+    /* password_TextField得到了FXML文件中<TextField fx:id="password_TextField">的引用。
+     * @FXML标签和FXML文件内容对应,即便不加此标签也能正确执行，但private必须用到此标签。
+     */
     @FXML
     private PasswordField password_TextField;
-    // password_TextField得到了FXML文件中<TextField fx:id="password_TextField">的引用。
+
     @FXML
     private ImageView login_background;
 
@@ -30,24 +34,99 @@ public class LoginController {
 
     @FXML
     private Label message;
-    /*
-    *@FXML标签和FXML文件内容对应,即便不加此标签也能正确执行，但private必须用到此标签。
-     */
 
     @FXML
-    void loginAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-        if (userName_TextField.getText().isEmpty()){
-            message.setText("账号不能为空！");
-        }
+    private RadioButton autoLogon;
 
-        JdbcUtil jdbcUtil = new JdbcUtil();
-        if ( jdbcUtil.validate(userName_TextField.getText(),password_TextField.getText()) ){
-            message.setText("登录成功！");
-        }else {
-            message.setText("登录失败！");
-        }
+    @FXML
+    private Button toRegisterAccount;
 
+    @FXML
+    private RadioButton rememberPassword;
+
+    @FXML
+    private Label forgetPassword;
+
+    private boolean isRemember = false;
+    // 登录
+    @FXML
+    void loginAction(ActionEvent event) {
+        if (userName_TextField.getText().isEmpty() || password_TextField.getText().isEmpty()) {
+            message.setText("账号或密码不能为空！");
+        } else {
+            JdbcUtil jdbcUtil = new JdbcUtil();
+            try {
+                // 连接数据库，检查账号是否正确
+                if (jdbcUtil.validate(userName_TextField.getText(), password_TextField.getText())) {
+                    message.setText("登录成功！");
+                    saveAccount(isRemember);
+                } else {
+                    message.setText("登录失败！");
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                message.setText("连接数据库失败！");
+            }
+
+
+        }
     }
+
+    private boolean saveAccount(boolean isRemember){
+        if (isRemember) {
+            File file = new File("/java/account.txt");// 创建文件保存账号信息
+            String content = "account：" + userName_TextField.getText() + " password：" + password_TextField.getText();// 获得要写入的字符串
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(file);// 创建文件输出流对象
+                //设置文件的隐藏属性
+                String set = "attrib +H " + file.getAbsolutePath();
+                System.out.println(set);
+                Runtime.getRuntime().exec(set);
+                //将字符串写入到文件中
+                fos.write(content.getBytes());
+                return true;
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } finally {
+                try {
+                    fos.close();// 关闭文件输出流
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        return false;
+    }
+
+    @FXML
+    void rememberChange(ActionEvent event) {
+        if(rememberPassword.isSelected()){
+            System.out.println("记住密码");
+            isRemember=true;
+
+        }else {
+            System.out.println("未记住密码");
+            isRemember=false;
+        }
+    }
+
+    @FXML
+    void autoLogonChange(ActionEvent event) {
+        if (autoLogon.isSelected()){
+            System.out.println("自登录");
+        }
+    }
+
+    @FXML
+    void doRegisterClicked(ActionEvent event) {
+        System.out.println("注册账号");
+    }
+
     public void initialize(){
 
     }
@@ -76,4 +155,5 @@ public class LoginController {
     public Label getMessage() {
         return message;
     }
+
 }
