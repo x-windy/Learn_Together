@@ -1,6 +1,6 @@
-package com.planett.learnt.java.login;
+package com.planett.learnt.java.controller;
 
-import com.planett.learnt.Util.JdbcUtil;
+import com.planett.learnt.java.Util.JdbcUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -73,6 +73,7 @@ public class LoginController {
         }
     }
 
+    // 记住密码，生成账号信息文件
     private boolean saveAccount(boolean isRemember){
         if (isRemember) {
             File file = new File("/java/account.txt");// 创建文件保存账号信息
@@ -103,6 +104,8 @@ public class LoginController {
         return false;
     }
 
+
+    // 记住密码单选框事件
     @FXML
     void rememberChange(ActionEvent event) {
         if(rememberPassword.isSelected()){
@@ -115,6 +118,8 @@ public class LoginController {
         }
     }
 
+
+    // 自动登录单选框事件
     @FXML
     void autoLogonChange(ActionEvent event) {
         if (autoLogon.isSelected()){
@@ -122,6 +127,7 @@ public class LoginController {
         }
     }
 
+    // 跳转注册账号按钮事件
     @FXML
     void doRegisterClicked(ActionEvent event) {
         System.out.println("注册账号");

@@ -1,4 +1,4 @@
-package com.planett.learnt.java.login;
+package com.planett.learnt.java.main;
 
 public class User {
     private String uid;

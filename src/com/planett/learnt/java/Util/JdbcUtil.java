@@ -1,6 +1,8 @@
-package com.planett.learnt.Util;
+package com.planett.learnt.java.Util;
 
+import javax.management.relation.Role;
 import java.sql.*;
+import java.util.UUID;
 
 public class JdbcUtil {
     private static final String DRIVER_CLASS ="com.mysql.cj.jdbc.Driver";
@@ -45,7 +47,8 @@ public class JdbcUtil {
         }
     }
     /*
-    * 检查数据唯一性*/
+    * 检查数据唯一性
+    * */
     public boolean validate(String userName,String userPassword) throws ClassNotFoundException, SQLException {
             JdbcUtil.loadClass();
             conn = JdbcUtil.getConn();
@@ -62,4 +65,23 @@ public class JdbcUtil {
             return false;
     }
 
+    /*
+    * 增添数据
+    * */
+    public boolean register(String uid,String userName,String userPassword,String phoneNumber,Date createTime) throws ClassNotFoundException, SQLException {
+        JdbcUtil.loadClass();
+        conn = JdbcUtil.getConn();
+        System.out.println(conn);
+        String sql= "insert into t_user(uid,userName,userPassword,phoneNumber,createTime,rid) values(?,?,?,?,?,?)";
+        preparedStatement.setString(1,uid);
+        preparedStatement.setString(2,userName);
+        preparedStatement.setString(3,userPassword);
+        preparedStatement.setString(4,phoneNumber);
+        preparedStatement.setDate(5,createTime);
+        preparedStatement.setString(6,"1");
+        if (preparedStatement.execute()){
+            return true;
+        }
+        return false;
+    }
 }
