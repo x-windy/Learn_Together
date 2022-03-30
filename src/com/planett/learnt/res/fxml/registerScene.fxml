@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.RegisterController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@/com/planett/learnt/res/css/styling.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.RegisterController">
     <children>
         <ImageView fx:id="login_background" fitHeight="458.0" fitWidth="302.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -29,7 +29,7 @@
       <TextField fx:id="phoneNumber_TextField" layoutX="343.0" layoutY="147.0" prefHeight="34.0" prefWidth="219.0" promptText="请输入您的手机号" />
       <Label layoutX="343.0" layoutY="132.0" text="手机号" />
       <Label layoutX="343.0" layoutY="321.0" text="验证码" />
-      <TextField layoutX="342.0" layoutY="336.0" prefHeight="33.0" prefWidth="88.0" />
+      <TextField fx:id="codeInput_TextField" layoutX="342.0" layoutY="336.0" prefHeight="33.0" prefWidth="88.0" />
       <ImageView fitHeight="26.0" fitWidth="69.0" layoutX="445.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/CAPTCHA.png" />

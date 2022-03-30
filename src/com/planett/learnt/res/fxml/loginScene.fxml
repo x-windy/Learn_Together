@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.LoginController">
+<AnchorPane stylesheets="@/com/planett/learnt/res/css/styling.css" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.LoginController">
    <children>
       <ImageView fx:id="login_background" fitHeight="458.0" fitWidth="302.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -30,5 +29,4 @@
          </font>
       </Label>
    </children>
-
-</AnchorPane>
+        </AnchorPane>

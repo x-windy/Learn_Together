@@ -53,6 +53,9 @@ public class RegisterController {
     @FXML
     private Label passwordConfirm_hint;
 
+    @FXML
+    private TextField codeInput_TextField;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -68,18 +71,24 @@ public class RegisterController {
         stage.setScene(scene);
         stage.show();
     }
-
+    // 注册
     @FXML
     void registerAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String userName = userName_TextField.getText();
         String phoneNumber = phoneNumber_TextField.getText();
         String password = passwordConfirm_TextField.getText();
         System.out.println("注册");
-        if (JdbcUtil.register(userName,phoneNumber,password)){
-            System.out.println("注册成功");
+        if (codeInput_TextField.getText() == "FFBB"){
+            codeConfirm_hint.setText("");
+            if (JdbcUtil.register(userName,phoneNumber,password)){
+                System.out.println("注册成功");
+            }else {
+                System.out.println("注册失败");
+            }
         }else {
-            System.out.println("注册失败");
+            codeConfirm_hint.setText("验证码错误！");
         }
+
 
     }
 

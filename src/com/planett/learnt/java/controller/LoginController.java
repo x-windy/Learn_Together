@@ -1,6 +1,7 @@
 package com.planett.learnt.java.controller;
 
 import com.planett.learnt.java.Util.JdbcUtil;
+import com.planett.learnt.java.main.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,19 +82,24 @@ public class LoginController {
     // 登录
     @FXML
     void loginAction(ActionEvent event) {
+
         if (userName_TextField.getText().isEmpty() || password_TextField.getText().isEmpty()) {
             message.setText("账号或密码不能为空！");
         } else {
             try {
                 // 连接数据库，检查账号是否正确
-                if (JdbcUtil.validate(userName_TextField.getText(), password_TextField.getText())) {
+                // “!”验证失败测试主界面
+                if (!JdbcUtil.validate(userName_TextField.getText(), password_TextField.getText())) {
                     message.setText("登录成功！");
                     saveAccount(isRemember);
-                    root = FXMLLoader.load(getClass().getResource("/com/planett/learnt/res/fxml/mainScene.fxml"));
+                    // 关闭当前窗口
                     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                    scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
+                    stage.close();
+
+                    // 生成主窗口,执行start
+                    MainApp mainApp = new MainApp();
+                    mainApp.showWindow();
+
                 } else {
                     message.setText("登录失败！");
                 }
@@ -102,6 +108,8 @@ public class LoginController {
             } catch (SQLException e) {
                 message.setText("连接数据库失败！");
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
