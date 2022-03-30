@@ -3,9 +3,14 @@ package com.planett.learnt.java.controller;
 import com.planett.learnt.java.Util.JdbcUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,7 +44,10 @@ public class LoginController {
     private RadioButton autoLogon;
 
     @FXML
-    private Button toRegisterAccount;
+    private Button toRegisterAccount_btn;
+
+    @FXML
+    private Button toLoginAccount_btn;
 
     @FXML
     private RadioButton rememberPassword;
@@ -48,18 +56,44 @@ public class LoginController {
     private Label forgetPassword;
 
     private boolean isRemember = false;
+    private boolean isAutoLogon = false;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+//
+//    public void switchToRegisterScene(ActionEvent event) throws IOException {
+//        Parent root = FXMLLoader.load(getClass().getResource("/com/planett/learnt/res/fxml/registerScene.fxml"));
+//        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+//    }
+//
+//    public void switchToLoginScene(ActionEvent event) throws IOException {
+//        Parent root = FXMLLoader.load(getClass().getResource("/com/planett/learnt/res/fxml/loginScene.fxml"));
+//        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+//    }
+
     // 登录
     @FXML
     void loginAction(ActionEvent event) {
         if (userName_TextField.getText().isEmpty() || password_TextField.getText().isEmpty()) {
             message.setText("账号或密码不能为空！");
         } else {
-            JdbcUtil jdbcUtil = new JdbcUtil();
             try {
                 // 连接数据库，检查账号是否正确
-                if (jdbcUtil.validate(userName_TextField.getText(), password_TextField.getText())) {
+                if (JdbcUtil.validate(userName_TextField.getText(), password_TextField.getText())) {
                     message.setText("登录成功！");
                     saveAccount(isRemember);
+                    root = FXMLLoader.load(getClass().getResource("/com/planett/learnt/res/fxml/mainScene.fxml"));
+                    stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
                 } else {
                     message.setText("登录失败！");
                 }
@@ -67,6 +101,8 @@ public class LoginController {
                 e.printStackTrace();
             } catch (SQLException e) {
                 message.setText("连接数据库失败！");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
 
@@ -111,7 +147,6 @@ public class LoginController {
         if(rememberPassword.isSelected()){
             System.out.println("记住密码");
             isRemember=true;
-
         }else {
             System.out.println("未记住密码");
             isRemember=false;
@@ -124,19 +159,67 @@ public class LoginController {
     void autoLogonChange(ActionEvent event) {
         if (autoLogon.isSelected()){
             System.out.println("自登录");
+            isAutoLogon = true;
+        }else {
+            isAutoLogon = false;
         }
     }
 
     // 跳转注册账号按钮事件
     @FXML
-    void doRegisterClicked(ActionEvent event) {
+    void switchToRegisterScene(ActionEvent event) throws IOException {
         System.out.println("注册账号");
+        root = FXMLLoader.load(getClass().getResource("/com/planett/learnt/res/fxml/registerScene.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
+
 
     public void initialize(){
 
     }
 
+    public Button getToRegisterAccount_btn() {
+        return toRegisterAccount_btn;
+    }
+
+    public Button getToLoginAccount_btn() {
+        return toLoginAccount_btn;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public Parent getRoot() {
+        return root;
+    }
+
+    public RadioButton getAutoLogon() {
+        return autoLogon;
+    }
+
+    public Button getToRegisterAccount() {
+        return toRegisterAccount_btn;
+    }
+
+    public RadioButton getRememberPassword() {
+        return rememberPassword;
+    }
+
+    public Label getForgetPassword() {
+        return forgetPassword;
+    }
+
+    public boolean isRemember() {
+        return isRemember;
+    }
 
     public PasswordField getPassword_TextField() {
         return password_TextField;

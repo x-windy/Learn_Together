@@ -1,5 +1,7 @@
 package com.planett.learnt.java.Util;
 
+import com.planett.learnt.java.main.User;
+
 import javax.management.relation.Role;
 import java.sql.*;
 import java.util.UUID;
@@ -9,9 +11,9 @@ public class JdbcUtil {
     private static final String URL="jdbc:mysql://localhost:3306/bbs?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8";
     private static final String USERNAME ="root";
     private static final String PASSWORD ="123456";
-    Connection conn = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet rs = null;
+    static Connection conn = null;
+    static PreparedStatement preparedStatement = null;
+    static ResultSet rs = null;
     /*
      * 加载数据库
      * */
@@ -49,7 +51,7 @@ public class JdbcUtil {
     /*
     * 检查数据唯一性
     * */
-    public boolean validate(String userName,String userPassword) throws ClassNotFoundException, SQLException {
+    public static boolean validate(String userName,String userPassword) throws ClassNotFoundException, SQLException {
             JdbcUtil.loadClass();
             conn = JdbcUtil.getConn();
             System.out.println(conn);
@@ -68,18 +70,20 @@ public class JdbcUtil {
     /*
     * 增添数据
     * */
-    public boolean register(String uid,String userName,String userPassword,String phoneNumber,Date createTime) throws ClassNotFoundException, SQLException {
+    public static boolean register(String userName,String userPassword,String phoneNumber) throws ClassNotFoundException, SQLException {
         JdbcUtil.loadClass();
         conn = JdbcUtil.getConn();
         System.out.println(conn);
-        String sql= "insert into t_user(uid,userName,userPassword,phoneNumber,createTime,rid) values(?,?,?,?,?,?)";
+        String uid = UUID.randomUUID().toString();
+        String sql= "insert into t_user(uid,userName,userPassword,phoneNumber,createTime,rid) values(?,?,?,?,now(),?)";
+        preparedStatement = conn.prepareStatement(sql);
         preparedStatement.setString(1,uid);
         preparedStatement.setString(2,userName);
         preparedStatement.setString(3,userPassword);
         preparedStatement.setString(4,phoneNumber);
-        preparedStatement.setDate(5,createTime);
-        preparedStatement.setString(6,"1");
-        if (preparedStatement.execute()){
+        preparedStatement.setString(5,"1");
+        System.out.println(preparedStatement);
+        if (preparedStatement.executeUpdate()==1){
             return true;
         }
         return false;
