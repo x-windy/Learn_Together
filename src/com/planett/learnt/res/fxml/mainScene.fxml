@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,13 +8,96 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.MainController">
    <children>
-      <Label layoutX="273.0" layoutY="97.0" text="title">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Label>
-   </children>
+      <VBox layoutX="6.0" layoutY="40.0" prefHeight="346.0" prefWidth="61.0">
+         <children>
+            <ToggleButton maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" selected="true" text="首页">
+               <toggleGroup>
+                  <ToggleGroup fx:id="leftbutton" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" text="聊天" toggleGroup="$leftbutton" />
+            <ToggleButton maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" text="活动" toggleGroup="$leftbutton" />
+            <ToggleButton maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" text="日历" toggleGroup="$leftbutton" />
+         </children>
+      </VBox>
+      <SplitPane dividerPositions="0.1694915254237288" layoutX="67.0" layoutY="29.0" prefHeight="371.0" prefWidth="533.0">
+         <items>
+            <SplitPane dividerPositions="0.7588075880758808" maxHeight="1.7976931348623157E308" orientation="VERTICAL">
+               <items>
+                  <ScrollPane maxWidth="1.7976931348623157E308">
+                     <content>
+                        <FlowPane prefHeight="277.0" prefWidth="94.0">
+                           <children>
+                              <HBox maxWidth="1.7976931348623157E308">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" text="好友">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </FlowPane>
+                     </content>
+                  </ScrollPane>
+                  <ScrollPane maxWidth="1.7976931348623157E308">
+                     <content>
+                        <FlowPane prefHeight="84.0" prefWidth="94.0">
+                           <children>
+                              <HBox maxWidth="1.7976931348623157E308">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" text="班组">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </FlowPane>
+                     </content>
+                  </ScrollPane>
+               </items>
+            </SplitPane>
+            <VBox prefHeight="369.0" prefWidth="346.0">
+               <children>
+                  <FlowPane prefHeight="33.0" prefWidth="431.0">
+                     <children>
+                        <ToolBar prefHeight="40.0" prefWidth="438.0">
+                          <items>
+                            <Button mnemonicParsing="false" text="上上下下" />
+                              <Button mnemonicParsing="false" text="左左右右" />
+                          </items>
+                        </ToolBar>
+                     </children>
+                  </FlowPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <FlowPane alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="431.0">
+                           <children>
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+                           </children>
+                        </FlowPane>
+                        <Separator layoutY="33.0" prefHeight="187.0" prefWidth="438.0" />
+                        <ScrollPane layoutY="33.0" prefHeight="209.0" prefWidth="438.0" />
+                        <VBox layoutY="239.0" prefHeight="86.0" prefWidth="438.0">
+                           <children>
+                              <TextArea maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="438.0" wrapText="true" />
+                              <FlowPane alignment="BOTTOM_RIGHT" prefHeight="24.0" prefWidth="438.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="发送" />
+                                 </children>
+                              </FlowPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </items>
+      </SplitPane>
+   </children>  
 </AnchorPane>
