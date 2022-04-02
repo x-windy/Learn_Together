@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,13 +8,124 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@/com/planett/learnt/res/css/mainStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.MainController">
    <children>
-      <Label layoutX="273.0" layoutY="97.0" text="title">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Label>
-   </children>
+      <TabPane fx:id="navigatorTab_pane"  maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="toHome" text="首页" />
+          <Tab fx:id="toChat" text="聊天">
+               <content>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <SplitPane dividerPositions="0.13530824659727783" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <items>
+                              <SplitPane dividerPositions="0.65125" maxWidth="400.0" minWidth="100.0" orientation="VERTICAL">
+                                 <items>
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                       <content>
+                                          <FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                             <children>
+                                                <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                                   <children>
+                                                      <Label maxHeight="1.7976931348623157E308" text="好友">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </FlowPane>
+                                       </content>
+                                    </ScrollPane>
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                       <content>
+                                          <FlowPane>
+                                             <children>
+                                                <HBox maxWidth="1.7976931348623157E308">
+                                                   <children>
+                                                      <Label maxHeight="1.7976931348623157E308" text="班组">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </FlowPane>
+                                       </content>
+                                    </ScrollPane>
+                                 </items>
+                              </SplitPane>
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                 <children>
+                                    <FlowPane maxWidth="1.7976931348623157E308">
+                                       <children>
+                                          <ToolBar prefHeight="25.0" prefWidth="1076.0" />
+                                       </children>
+                                    </FlowPane>
+                                    <Separator prefHeight="0.0" prefWidth="1034.0" />
+                                    <TabPane  fx:id="chatTab_pane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                                      <style>
+                                          tab-label{
+                                          -fx-rotate: 90;
+                                          }
+
+                                      </style>
+                                        <tabs >
+                                        <Tab text="聊天">
+                                          <content>
+                                            <AnchorPane>
+                                                   <children>
+                                                      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutY="27.0" prefHeight="437.0" prefWidth="1077.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
+                                                      <Separator layoutY="463.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                                      <TextArea fx:id="inputMessage_text" layoutY="464.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="输入新的消息" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="464.0">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </TextArea>
+                                                      <Separator layoutX="35.0" layoutY="702.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                                      <VBox layoutY="705.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                                         <children>
+                                                            <FlowPane alignment="BOTTOM_RIGHT" prefHeight="29.0" prefWidth="1077.0">
+                                                               <children>
+                                                                  <Button fx:id="send_btn" mnemonicParsing="false" text="发送" />
+                                                               </children>
+                                                            </FlowPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                        <Tab text="文件">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                          </content>
+                                        </Tab>
+                                          <Tab text="图片">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                             </content>
+                                          </Tab>
+                                          <Tab text="任务">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                             </content>
+                                          </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children>
+                              </VBox>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="toActivity" text="活动" />
+            <Tab fx:id="toCalendar" text="日历" />
+        </tabs>
+      </TabPane>
+   </children>  
 </AnchorPane>

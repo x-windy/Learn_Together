@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane stylesheets="@/com/planett/learnt/res/css/styling.css" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@/com/planett/learnt/res/css/styling.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.LoginController">
    <children>
-      <ImageView fx:id="login_background" fitHeight="458.0" fitWidth="302.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="login_background" fitHeight="458.0" fitWidth="379.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image fx:id="login_background_image" url="@../images/login_bg.jpg" />
          </image></ImageView>
-           <Separator layoutY="-7.0" orientation="VERTICAL" prefHeight="403.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+           <Separator layoutY="-7.0" orientation="VERTICAL" prefHeight="458.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Button fx:id="toRegisterAccount_btn" layoutX="517.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToRegisterScene" prefHeight="23.0" prefWidth="69.0" text="注册账号" />
            <Label layoutX="342.0" layoutY="75.0" text="账号" />
            <Label layoutX="342.0" layoutY="136.0" text="密码" />
