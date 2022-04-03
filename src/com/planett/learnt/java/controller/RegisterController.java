@@ -27,7 +27,7 @@ public class RegisterController {
     private Button toLoginAccount_btn;
 
     @FXML
-    private TextField userName_TextField;
+    private TextField account_TextField;
 
     @FXML
     private PasswordField passwordConfirm_TextField;
@@ -65,7 +65,7 @@ public class RegisterController {
     // 返回登录界面
     @FXML
     void switchToLoginScene(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/planett/learnt/res/fxml/loginScene.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/planett/learnt/View/fxml/loginScene.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -74,7 +74,7 @@ public class RegisterController {
     // 注册
     @FXML
     void registerAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-        String userName = userName_TextField.getText();
+        String userName = account_TextField.getText();
         String phoneNumber = phoneNumber_TextField.getText();
         String password = passwordConfirm_TextField.getText();
         System.out.println("注册");
@@ -88,7 +88,6 @@ public class RegisterController {
         }else {
             codeConfirm_hint.setText("验证码错误！");
         }
-
 
     }
 

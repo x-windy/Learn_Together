@@ -2,6 +2,7 @@ package com.planett.learnt.java.controller;
 
 import com.planett.learnt.java.Util.JdbcUtil;
 import com.planett.learnt.java.main.MainApp;
+import com.planett.learnt.java.Model.UserData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +37,7 @@ public class LoginController {
     private Button login_Button;
 
     @FXML
-    private TextField userName_TextField;
+    private TextField account_TextField;
 
     @FXML
     private Label message;
@@ -79,19 +80,27 @@ public class LoginController {
 //        stage.show();
 //    }
 
+
     // 登录
     @FXML
     void loginAction(ActionEvent event) {
 
-        if (userName_TextField.getText().isEmpty() || password_TextField.getText().isEmpty()) {
+        if (account_TextField.getText().isEmpty() || password_TextField.getText().isEmpty()) {
             message.setText("账号或密码不能为空！");
         } else {
             try {
                 // 连接数据库，检查账号是否正确
                 // “!”验证失败测试主界面
-                if (!JdbcUtil.validate(userName_TextField.getText(), password_TextField.getText())) {
+                if (!JdbcUtil.validate(account_TextField.getText(), password_TextField.getText())) {
                     message.setText("登录成功！");
+                    // 创建一个user实例
+                    // User user = new User(account_TextField.getText(),password_TextField.getText());
+                    // getCurrentAccount
+                    UserData currentAccount = UserData.getCurrentAccount();
+                    currentAccount.setAccount(account_TextField.getText());
+                    currentAccount.setUserPassword(password_TextField.getText());
                     saveAccount(isRemember);
+
                     // 关闭当前窗口
                     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                     stage.close();
@@ -121,7 +130,7 @@ public class LoginController {
     private boolean saveAccount(boolean isRemember){
         if (isRemember) {
             File file = new File("/java/account.txt");// 创建文件保存账号信息
-            String content = "account：" + userName_TextField.getText() + " password：" + password_TextField.getText();// 获得要写入的字符串
+            String content = "account：" + account_TextField.getText() + " password：" + password_TextField.getText();// 获得要写入的字符串
             FileOutputStream fos = null;
             try {
                 fos = new FileOutputStream(file);// 创建文件输出流对象
@@ -177,13 +186,12 @@ public class LoginController {
     @FXML
     void switchToRegisterScene(ActionEvent event) throws IOException {
         System.out.println("注册账号");
-        root = FXMLLoader.load(getClass().getResource("/com/planett/learnt/res/fxml/registerScene.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/planett/learnt/View/fxml/registerScene.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-
 
     public void initialize(){
 
@@ -246,7 +254,7 @@ public class LoginController {
     }
 
     public TextField getUserName_TextField() {
-        return userName_TextField;
+        return account_TextField;
     }
 
     public Label getMessage() {

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@/com/planett/learnt/res/css/styling.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.RegisterController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@/com/planett/learnt/View/css/styling.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.RegisterController">
     <children>
         <ImageView fx:id="login_background" fitHeight="458.0" fitWidth="302.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -16,7 +16,7 @@
         <Button fx:id="toLoginAccount_btn" layoutX="517.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToLoginScene" prefHeight="23.0" prefWidth="69.0" text="登录账号" />
         <Label layoutX="343.0" layoutY="67.0" text="账号" />
         <Label layoutX="343.0" layoutY="196.0" text="密码" />
-        <TextField fx:id="userName_TextField" layoutX="343.0" layoutY="82.0" prefHeight="34.0" prefWidth="219.0" promptText="请输入您的账号" />
+        <TextField fx:id="account_TextField" layoutX="343.0" layoutY="82.0" prefHeight="34.0" prefWidth="219.0" promptText="请输入您的账号" />
         <PasswordField fx:id="password_TextField" layoutX="343.0" layoutY="211.0" prefHeight="33.0" prefWidth="219.0" promptText="请输入您的密码" />
       <Button fx:id="register_Button" layoutX="342.0" layoutY="386.0" mnemonicParsing="false" onAction="#registerAction" prefHeight="33.0" prefWidth="219.0" text="注册" />
         <Label fx:id="accountInput_hint" layoutX="343.0" layoutY="116.0" prefHeight="15.0" prefWidth="219.0" textFill="RED" />

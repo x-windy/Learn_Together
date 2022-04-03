@@ -16,7 +16,7 @@ public class LoginApp extends Application {
 
         // 加载fxml文件
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/com/planett/learnt/res/fxml/loginScene.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/com/planett/learnt/View/fxml/loginScene.fxml"));
         Parent root = fxmlLoader.load();
 
         Scene scene = new Scene(root);

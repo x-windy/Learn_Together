@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@/com/planett/learnt/res/css/mainStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@/com/planett/learnt/View/css/mainStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.MainController">
    <children>
-      <TabPane fx:id="navigatorTab_pane"  maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane fx:id="navigatorTab_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="769.0" prefWidth="1280.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab fx:id="toHome" text="首页" />
           <Tab fx:id="toChat" text="聊天">
@@ -21,38 +21,55 @@
                            <items>
                               <SplitPane dividerPositions="0.65125" maxWidth="400.0" minWidth="100.0" orientation="VERTICAL">
                                  <items>
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vbarPolicy="NEVER">
                                        <content>
-                                          <FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                          <AnchorPane>
                                              <children>
-                                                <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                                   <children>
-                                                      <Label maxHeight="1.7976931348623157E308" text="好友">
+                                                <BorderPane AnchorPane.bottomAnchor="487.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <left>
+                                                      <Label text="好友" BorderPane.alignment="CENTER">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
+                                                         <BorderPane.margin>
+                                                            <Insets left="2.0" />
+                                                         </BorderPane.margin>
                                                       </Label>
-                                                   </children>
-                                                </HBox>
+                                                   </left>
+                                                   <center>
+                                                      <TextField fx:id="searchFrd" promptText="搜索好友" BorderPane.alignment="CENTER" />
+                                                   </center>
+                                                   <right>
+                                                      <Button fx:id="addFrd" mnemonicParsing="false" text="+" BorderPane.alignment="CENTER" />
+                                                   </right>
+                                                </BorderPane>
+                                                <FlowPane fx:id="showFriendList" layoutX="-1.0" layoutY="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                              </children>
-                                          </FlowPane>
+                                          </AnchorPane>
                                        </content>
                                     </ScrollPane>
                                     <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                        <content>
-                                          <FlowPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <HBox maxWidth="1.7976931348623157E308">
-                                                   <children>
-                                                      <Label maxHeight="1.7976931348623157E308" text="班组">
+                                                <BorderPane prefHeight="28.0" prefWidth="166.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <left>
+                                                      <Label maxHeight="1.7976931348623157E308" text="班组" BorderPane.alignment="CENTER">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
+                                                         <padding>
+                                                            <Insets left="2.0" />
+                                                         </padding>
                                                       </Label>
-                                                   </children>
-                                                </HBox>
+                                                   </left>
+                                                   <right>
+                                                      <Button fx:id="addFrd1" mnemonicParsing="false" text="+" BorderPane.alignment="CENTER" />
+                                                   </right>
+                                                </BorderPane>
+                                                <FlowPane hgap="100.0" layoutY="29.0" prefHeight="246.0" prefWidth="166.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                              </children>
-                                          </FlowPane>
+                                          </AnchorPane>
                                        </content>
                                     </ScrollPane>
                                  </items>
@@ -65,27 +82,23 @@
                                        </children>
                                     </FlowPane>
                                     <Separator prefHeight="0.0" prefWidth="1034.0" />
-                                    <TabPane  fx:id="chatTab_pane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-                                        <tabs >
+                                    <TabPane fx:id="chatTab_pane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                                        <tabs>
                                         <Tab text="聊天">
                                           <content>
                                             <AnchorPane>
                                                    <children>
-                                                      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutY="27.0" prefHeight="437.0" prefWidth="1077.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
-                                                      <Separator layoutY="463.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                                      <TextArea fx:id="inputMessage_text" layoutY="464.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="输入新的消息" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="464.0">
-                                                         <font>
-                                                            <Font size="18.0" />
-                                                         </font>
-                                                      </TextArea>
-                                                      <Separator layoutX="35.0" layoutY="702.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                                      <VBox layoutY="705.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                                      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <children>
-                                                            <FlowPane alignment="BOTTOM_RIGHT" prefHeight="29.0" prefWidth="1077.0">
-                                                               <children>
-                                                                  <Button fx:id="send_btn" mnemonicParsing="false" text="发送" />
-                                                               </children>
-                                                            </FlowPane>
+                                                            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER" VBox.vgrow="ALWAYS" />
+                                                            <Separator />
+                                                            <TextArea fx:id="inputMessage_text" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="输入新的消息" wrapText="true">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </TextArea>
+                                                            <Separator />
+                                                            <Button fx:id="send_btn" mnemonicParsing="false" text="发送" />
                                                          </children>
                                                       </VBox>
                                                    </children>

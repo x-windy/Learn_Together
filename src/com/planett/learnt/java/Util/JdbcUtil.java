@@ -1,8 +1,8 @@
 package com.planett.learnt.java.Util;
 
-import com.planett.learnt.java.main.User;
+import com.planett.learnt.java.Model.FrdData;
+import com.planett.learnt.java.Model.UserData;
 
-import javax.management.relation.Role;
 import java.sql.*;
 import java.util.UUID;
 
@@ -49,15 +49,35 @@ public class JdbcUtil {
         }
     }
     /*
+    * 根据好友账号获取基本资料
+    * */
+    public static FrdData getFrdData(String account) throws ClassNotFoundException, SQLException {
+        JdbcUtil.loadClass();
+        conn = JdbcUtil.getConn();
+        String sql = "SELECT userName,onlineStatus,accountStatus from t_user where account= ?";
+        preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setString(1,account);
+        rs = preparedStatement.executeQuery();
+        FrdData frd = new FrdData();
+        while (rs.next()){
+           frd.setAccount(account);
+           frd.setUserName(rs.getString("userName"));
+           frd.setAccountStatus(rs.getString("accountStatus"));
+           frd.setOnlineStatus(rs.getString("onlineStatus"));
+        }
+        return frd;
+    }
+
+    /*
     * 检查数据唯一性
     * */
-    public static boolean validate(String userName,String userPassword) throws ClassNotFoundException, SQLException {
+    public static boolean validate(String account,String userPassword) throws ClassNotFoundException, SQLException {
             JdbcUtil.loadClass();
             conn = JdbcUtil.getConn();
             System.out.println(conn);
-            String sql = "select * from t_user where userName = ? and userPassword = ?";
+            String sql = "select * from t_user where account = ? and userPassword = ?";
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, userName);
+            preparedStatement.setString(1, account);
             preparedStatement.setString(2, userPassword);
 
             rs = preparedStatement.executeQuery();
@@ -70,15 +90,15 @@ public class JdbcUtil {
     /*
     * 增添数据
     * */
-    public static boolean register(String userName,String userPassword,String phoneNumber) throws ClassNotFoundException, SQLException {
+    public static boolean register(String account,String userPassword,String phoneNumber) throws ClassNotFoundException, SQLException {
         JdbcUtil.loadClass();
         conn = JdbcUtil.getConn();
         System.out.println(conn);
         String uid = UUID.randomUUID().toString();
-        String sql= "insert into t_user(uid,userName,userPassword,phoneNumber,createTime,rid) values(?,?,?,?,now(),?)";
+        String sql= "insert into t_user(uid,account,userPassword,phoneNumber,createTime,rid) values(?,?,?,?,now(),?)";
         preparedStatement = conn.prepareStatement(sql);
         preparedStatement.setString(1,uid);
-        preparedStatement.setString(2,userName);
+        preparedStatement.setString(2,account);
         preparedStatement.setString(3,userPassword);
         preparedStatement.setString(4,phoneNumber);
         preparedStatement.setString(5,"1");
