@@ -1,14 +1,13 @@
 package com.planett.learnt.java.controller;
 
+import com.planett.learnt.java.main.FriendListItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.FlowPane;
 
 public class MainController {
-
     @FXML
-    private FlowPane showFriendList;
+    private ListView<?> showFriendList;
 
     @FXML
     private TabPane chatTab_pane;
@@ -53,6 +52,8 @@ public class MainController {
     void toChatScence(ActionEvent event) {
 
     }
+
+
 
     public TabPane getChatTab_pane() {
         return chatTab_pane;
@@ -142,11 +143,11 @@ public class MainController {
         this.toChat = toChat;
     }
 
-    public FlowPane getShowFriendList() {
+    public ListView<?> getShowFriendList() {
         return showFriendList;
     }
 
-    public void setShowFriendList(FlowPane showFriendList) {
+    public void setShowFriendList(ListView<?> showFriendList) {
         this.showFriendList = showFriendList;
     }
 }

@@ -1,6 +1,7 @@
 package com.planett.learnt.java.Model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserData {
@@ -12,11 +13,17 @@ public class UserData {
     private Date createDate;
     private String accountStatus;
     private String onlineStatus;
-    private static UserData currentAccount;
-    // 保存好友数据
-    private List<FrdData> frdDataList;
 
-    public UserData(){}
+    // 当前登录的账号
+    private static UserData currentAccount = new UserData();
+
+    // 保存好友数据
+    private ArrayList<FrdData> frdDataList;
+
+    public UserData(){
+        // 初始化好友表
+        frdDataList = new ArrayList<FrdData>();
+    }
 
 
     public UserData(String account, String userPassword){
@@ -34,16 +41,17 @@ public class UserData {
         this.createDate = createDate;
     }
 
+
+    // 获取当前登录的账号
     public static UserData getCurrentAccount(){
-        currentAccount = new UserData();
         return currentAccount;
     }
 
-    public List<FrdData> getFrdDataList() {
+    public ArrayList<FrdData> getFrdDataList() {
         return frdDataList;
     }
 
-    public void setFrdDataList(List<FrdData> frdDataList) {
+    public void setFrdDataList(ArrayList<FrdData> frdDataList) {
         this.frdDataList = frdDataList;
     }
 

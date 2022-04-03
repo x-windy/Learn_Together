@@ -67,7 +67,23 @@ public class JdbcUtil {
         }
         return frd;
     }
+    /*
+    * 查询好友是否存在
+    * */
+    public static boolean findUser(String account) throws SQLException, ClassNotFoundException {
+        JdbcUtil.loadClass();
+        conn = JdbcUtil.getConn();
+        System.out.println(conn);
+        String sql = "select * from t_user where account = ?";
+        preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setString(1, account);
 
+        rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            return true;
+        }
+        return false;
+    }
     /*
     * 检查数据唯一性
     * */
