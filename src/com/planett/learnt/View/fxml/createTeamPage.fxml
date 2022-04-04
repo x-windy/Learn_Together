@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="createTeam_page" prefHeight="534.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.createTeamController">
+   <children>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="62.0" prefWidth="128.0" text="创建新班组">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="86.0" text="班组名称" />
+      <TextField fx:id="createTeamName_tf" layoutX="47.0" layoutY="101.0" prefHeight="39.0" prefWidth="484.0" promptText="创建班组名称" />
+      <Label layoutX="47.0" layoutY="158.0" text="邀请至班组" />
+      <TextField fx:id="inviteFriend_tf" layoutX="47.0" layoutY="174.0" prefHeight="39.0" prefWidth="484.0" promptText="输入好友名称" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="47.0" layoutY="224.0" prefHeight="186.0" prefWidth="484.0" vbarPolicy="NEVER" AnchorPane.rightAnchor="119.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0">
+               <children>
+                  <ListView fx:id="showFrdList_ct" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Button fx:id="createTeam_btn" layoutX="50.0" layoutY="440.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="创建班组" />
+      <Button fx:id="cancelCreateTeam_btn" layoutX="361.0" layoutY="440.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="取消" />
+   </children>
+</AnchorPane>

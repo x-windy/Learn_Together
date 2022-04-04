@@ -1,6 +1,7 @@
 package com.planett.learnt.java.main;
 
 import com.planett.learnt.java.Model.FrdData;
+import com.planett.learnt.java.Model.TeamData;
 import com.planett.learnt.java.Model.UserData;
 import com.planett.learnt.java.Util.JdbcUtil;
 import com.planett.learnt.java.controller.MainController;
@@ -11,16 +12,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class MainApp extends Application {
     Stage stage=new Stage();
     FriendListItem friendListItem = new FriendListItem();
     MainController mainController;
-    ObservableList observableList;
+    ObservableList observableList_friendList;
+    ObservableList observableList_teamList;
     @Override
     public void start(Stage primaryStage) throws Exception {
         // 加载fxml文件
@@ -30,9 +32,13 @@ public class MainApp extends Application {
 
         mainController = fxmlLoader.getController();
         mainController.getShowFriendList().setPlaceholder(new Label("没有好友"));
+        mainController.getShowTeamList().setPlaceholder(new Label("班组为空"));
+
         // listView好友列表可观察数据
-        observableList = FXCollections.observableArrayList();
-        mainController.getShowFriendList().setItems(observableList);
+        observableList_friendList = FXCollections.observableArrayList();
+        observableList_teamList = FXCollections.observableArrayList();
+        mainController.getShowFriendList().setItems(observableList_friendList);
+        mainController.getShowTeamList().setItems(observableList_teamList);
 
         // 添加好友事件
         mainController.getAddFrd().setOnAction(event -> {
@@ -61,6 +67,12 @@ public class MainApp extends Application {
 
         });
 
+
+        // 添加班组
+        mainController.getAddTeam().setOnAction(event -> {
+            addTeam();
+        });
+
         Scene scene = new Scene(root,1280,800);
         primaryStage.setTitle("Learn Together");
         primaryStage.setScene(scene);
@@ -75,7 +87,10 @@ public class MainApp extends Application {
 
     }
 
+
+    // 添加好友实现
     public void addFriend(){
+
         System.out.println("添加好友:" + mainController.getSearchFrd().getText() );
         try {
             if (mainController.getSearchFrd().getText()!="" && JdbcUtil.findUser(mainController.getSearchFrd().getText())){
@@ -85,15 +100,34 @@ public class MainApp extends Application {
                 UserData.getCurrentAccount().getFrdDataList().add(frdData);
                 System.out.println("添加成功！");
                 FriendListItem friendListItem = new FriendListItem(frdData.getUserName());
-                observableList.add(friendListItem.getBorderPane());
+                observableList_friendList.add(friendListItem.getBorderPane());
             }else {
                 System.out.println("不能为空");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("数据库连接失败");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+    }
+
+    // 添加班组实现
+    public void  addTeam(){
+        System.out.println("添加班组");
+        mainController.getShowChatMain_vbox().setVisible(false);
+        // 显示创建班组页面
+        mainController.getShowPane().getChildren().add(mainController.getCreateTeamController().getCreateTeam_page());
+
+        // 添加群组
+        mainController.getCreateTeamController().getCreateTeam_btn().setOnAction(event -> {
+            if ( mainController.getCreateTeamController().getCreateTeamName_tf().getText()!=""){
+                String teamId = UUID.randomUUID().toString().replace('-',' ');
+                TeamData teamData = new TeamData(teamId,mainController.getCreateTeamController().getCreateTeamName_tf().getText());
+                observableList_teamList.add(new Label(teamData.getTeamName()));
+            }
+
+        });
 
     }
 

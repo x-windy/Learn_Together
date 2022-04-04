@@ -1,19 +1,34 @@
 package com.planett.learnt.java.controller;
 
-import com.planett.learnt.java.main.FriendListItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
-public class MainController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MainController implements Initializable {
+
     @FXML
-    private ListView<?> showFriendList;
+    private Button addFrd;
+
+    @FXML
+    private TabPane navigatorTab_pane;
+
+    @FXML
+    private Tab toHome;
+
+    @FXML
+    private TextField searchFrd;
 
     @FXML
     private TabPane chatTab_pane;
 
     @FXML
-    private Button addFrd;
+    private ListView<?> showFriendList;
 
     @FXML
     private Tab toActivity;
@@ -22,26 +37,29 @@ public class MainController {
     private Tab toCalendar;
 
     @FXML
+    private ListView<?> showTeamList;
+
+    @FXML
     private TextArea inputMessage_text;
-
-    @FXML
-    private TabPane navigatorTab_pane;
-
-    @FXML
-    private Button addFrd1;
-
-    @FXML
-    private Tab toHome;
 
     @FXML
     private Button send_btn;
 
     @FXML
-    private TextField searchFrd;
-
-    @FXML
     private Tab toChat;
 
+    @FXML
+    private Button addTeam;
+
+    @FXML
+    private VBox showChatMain_vbox;
+
+    @FXML
+    private Pane showPane;
+
+    // 创建班组页面
+    @FXML
+    private createTeamController createTeamController;
 
     @FXML
     void toHome(ActionEvent event) {
@@ -54,6 +72,21 @@ public class MainController {
     }
 
 
+    public ListView<?> getShowTeamList() {
+        return showTeamList;
+    }
+
+    public void setShowTeamList(ListView<?> showTeamList) {
+        this.showTeamList = showTeamList;
+    }
+
+    public Button getAddTeam() {
+        return addTeam;
+    }
+
+    public void setAddTeam(Button addTeam) {
+        this.addTeam = addTeam;
+    }
 
     public TabPane getChatTab_pane() {
         return chatTab_pane;
@@ -103,13 +136,6 @@ public class MainController {
         this.navigatorTab_pane = navigatorTab_pane;
     }
 
-    public Button getAddFrd1() {
-        return addFrd1;
-    }
-
-    public void setAddFrd1(Button addFrd1) {
-        this.addFrd1 = addFrd1;
-    }
 
     public Tab getToHome() {
         return toHome;
@@ -149,5 +175,34 @@ public class MainController {
 
     public void setShowFriendList(ListView<?> showFriendList) {
         this.showFriendList = showFriendList;
+    }
+
+    public com.planett.learnt.java.controller.createTeamController getCreateTeamController() {
+        return createTeamController;
+    }
+
+    public void setCreateTeamController(com.planett.learnt.java.controller.createTeamController createTeamController) {
+        this.createTeamController = createTeamController;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
+    public VBox getShowChatMain_vbox() {
+        return showChatMain_vbox;
+    }
+
+    public void setShowChatMain_vbox(VBox showChatMain_vbox) {
+        this.showChatMain_vbox = showChatMain_vbox;
+    }
+
+    public Pane getShowPane() {
+        return showPane;
+    }
+
+    public void setShowPane(Pane showPane) {
+        this.showPane = showPane;
     }
 }

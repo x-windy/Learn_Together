@@ -1,4 +1,4 @@
 package com.planett.learnt.java.main;
 
-public class ClassListItem {
+public class TeamPage {
 }
