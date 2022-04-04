@@ -5,6 +5,7 @@ import com.planett.learnt.java.Model.TeamData;
 import com.planett.learnt.java.Model.UserData;
 import com.planett.learnt.java.Util.JdbcUtil;
 import com.planett.learnt.java.controller.MainController;
+import com.planett.learnt.java.controller.CreateTeamController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,29 +15,43 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.UUID;
 
 public class MainApp extends Application {
     Stage stage=new Stage();
     FriendListItem friendListItem = new FriendListItem();
+
     MainController mainController;
+    CreateTeamController createTeamController;
+
     ObservableList observableList_friendList;
     ObservableList observableList_teamList;
+    FXMLLoader fxmlLoader;
+    FrdData frdData;
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         // 加载fxml文件
-        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/com/planett/learnt/View/fxml/mainScene.fxml"));
+
         Parent root = fxmlLoader.load();
 
+        // 获取controller
         mainController = fxmlLoader.getController();
+
+        createTeamController = mainController.getCreateTeamController();
+
         mainController.getShowFriendList().setPlaceholder(new Label("没有好友"));
         mainController.getShowTeamList().setPlaceholder(new Label("班组为空"));
 
-        // listView好友列表可观察数据
+        // listView好友/班组列表可观察数据
         observableList_friendList = FXCollections.observableArrayList();
         observableList_teamList = FXCollections.observableArrayList();
+
+        // 设置listView的observable
         mainController.getShowFriendList().setItems(observableList_friendList);
         mainController.getShowTeamList().setItems(observableList_teamList);
 
@@ -70,8 +85,13 @@ public class MainApp extends Application {
 
         // 添加班组
         mainController.getAddTeam().setOnAction(event -> {
-            addTeam();
+            try {
+                addTeam();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
+
 
         Scene scene = new Scene(root,1280,800);
         primaryStage.setTitle("Learn Together");
@@ -96,7 +116,7 @@ public class MainApp extends Application {
             if (mainController.getSearchFrd().getText()!="" && JdbcUtil.findUser(mainController.getSearchFrd().getText())){
                 // 添加好友
 
-                FrdData frdData = JdbcUtil.getFrdData(mainController.getSearchFrd().getText());
+                frdData = JdbcUtil.getFrdData(mainController.getSearchFrd().getText());
                 UserData.getCurrentAccount().getFrdDataList().add(frdData);
                 System.out.println("添加成功！");
                 FriendListItem friendListItem = new FriendListItem(frdData.getUserName());
@@ -113,21 +133,52 @@ public class MainApp extends Application {
     }
 
     // 添加班组实现
-    public void  addTeam(){
+    public void  addTeam() throws IOException {
         System.out.println("添加班组");
-        mainController.getShowChatMain_vbox().setVisible(false);
+        System.out.println(  mainController.getCreateTeamController().getCreateTeamName_tf());
+        mainController.getChatHomePane().setVisible(false);
         // 显示创建班组页面
-        mainController.getShowPane().getChildren().add(mainController.getCreateTeamController().getCreateTeam_page());
+//        mainController.getShowPane().getChildren().add(createTeamLoader.load());
+//        mainController.getShowPane().getChildren().add(createTeamController.getCreateTeam_page());
+        createTeamController.getCreateTeam_page().setVisible(true);
+        // 添加群组按钮
 
-        // 添加群组
         mainController.getCreateTeamController().getCreateTeam_btn().setOnAction(event -> {
-            if ( mainController.getCreateTeamController().getCreateTeamName_tf().getText()!=""){
-                String teamId = UUID.randomUUID().toString().replace('-',' ');
-                TeamData teamData = new TeamData(teamId,mainController.getCreateTeamController().getCreateTeamName_tf().getText());
+            System.out.println("点击了添加群组");
+            if (  createTeamController.getCreateTeamName_tf().getText()!="" &&  createTeamController.getInviteFriend_tf().getText()!=""){
+                String teamId = UUID.randomUUID().toString().substring(0,5);
+                // 创建班组实例
+                TeamData teamData = new TeamData(teamId, createTeamController.getCreateTeamName_tf().getText(), UserData.getCurrentAccount().getAccount());
+                // 添加信息到数据库
+                try {
+                    JdbcUtil.createTeam(teamData.getTeamId(),teamData.getTeamName(),teamData.getTeamCreator());
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                // 添加群组列表成员
+                observableList_teamList.add(new Label(teamData.getTeamName()));
+
+            }else if (createTeamController.getCreateTeamName_tf().getText()!="" ){
+                String teamId = UUID.randomUUID().toString().substring(0,5);
+                // 创建班组实例
+                TeamData teamData = new TeamData(teamId, createTeamController.getCreateTeamName_tf().getText(),UserData.getCurrentAccount().getAccount(), createTeamController.getInviteFriend_tf().getText());
+                // 添加信息到数据库
+                try {
+                    JdbcUtil.inviteToTeam(teamId, createTeamController.getCreateTeamName_tf().getText());
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                // 添加群组列表成员
                 observableList_teamList.add(new Label(teamData.getTeamName()));
             }
 
         });
+
 
     }
 

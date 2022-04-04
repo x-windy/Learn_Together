@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -24,8 +26,6 @@ public class MainController implements Initializable {
     @FXML
     private TextField searchFrd;
 
-    @FXML
-    private TabPane chatTab_pane;
 
     @FXML
     private ListView<?> showFriendList;
@@ -39,11 +39,6 @@ public class MainController implements Initializable {
     @FXML
     private ListView<?> showTeamList;
 
-    @FXML
-    private TextArea inputMessage_text;
-
-    @FXML
-    private Button send_btn;
 
     @FXML
     private Tab toChat;
@@ -52,14 +47,17 @@ public class MainController implements Initializable {
     private Button addTeam;
 
     @FXML
-    private VBox showChatMain_vbox;
+    private BorderPane chatHomePane;
 
     @FXML
     private Pane showPane;
 
     // 创建班组页面
     @FXML
-    private createTeamController createTeamController;
+    private CreateTeamController createTeamController;
+    @FXML
+    private ChatPageController chatPageController;
+
 
     @FXML
     void toHome(ActionEvent event) {
@@ -70,31 +68,11 @@ public class MainController implements Initializable {
     void toChatScence(ActionEvent event) {
 
     }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-
-    public ListView<?> getShowTeamList() {
-        return showTeamList;
     }
 
-    public void setShowTeamList(ListView<?> showTeamList) {
-        this.showTeamList = showTeamList;
-    }
-
-    public Button getAddTeam() {
-        return addTeam;
-    }
-
-    public void setAddTeam(Button addTeam) {
-        this.addTeam = addTeam;
-    }
-
-    public TabPane getChatTab_pane() {
-        return chatTab_pane;
-    }
-
-    public void setChatTab_pane(TabPane chatTab_pane) {
-        this.chatTab_pane = chatTab_pane;
-    }
 
     public Button getAddFrd() {
         return addFrd;
@@ -102,6 +80,38 @@ public class MainController implements Initializable {
 
     public void setAddFrd(Button addFrd) {
         this.addFrd = addFrd;
+    }
+
+    public TabPane getNavigatorTab_pane() {
+        return navigatorTab_pane;
+    }
+
+    public void setNavigatorTab_pane(TabPane navigatorTab_pane) {
+        this.navigatorTab_pane = navigatorTab_pane;
+    }
+
+    public Tab getToHome() {
+        return toHome;
+    }
+
+    public void setToHome(Tab toHome) {
+        this.toHome = toHome;
+    }
+
+    public TextField getSearchFrd() {
+        return searchFrd;
+    }
+
+    public void setSearchFrd(TextField searchFrd) {
+        this.searchFrd = searchFrd;
+    }
+
+    public ListView<?> getShowFriendList() {
+        return showFriendList;
+    }
+
+    public void setShowFriendList(ListView<?> showFriendList) {
+        this.showFriendList = showFriendList;
     }
 
     public Tab getToActivity() {
@@ -120,45 +130,12 @@ public class MainController implements Initializable {
         this.toCalendar = toCalendar;
     }
 
-    public TextArea getInputMessage_text() {
-        return inputMessage_text;
+    public ListView<?> getShowTeamList() {
+        return showTeamList;
     }
 
-    public void setInputMessage_text(TextArea inputMessage_text) {
-        this.inputMessage_text = inputMessage_text;
-    }
-
-    public TabPane getNavigatorTab_pane() {
-        return navigatorTab_pane;
-    }
-
-    public void setNavigatorTab_pane(TabPane navigatorTab_pane) {
-        this.navigatorTab_pane = navigatorTab_pane;
-    }
-
-
-    public Tab getToHome() {
-        return toHome;
-    }
-
-    public void setToHome(Tab toHome) {
-        this.toHome = toHome;
-    }
-
-    public Button getSend_btn() {
-        return send_btn;
-    }
-
-    public void setSend_btn(Button send_btn) {
-        this.send_btn = send_btn;
-    }
-
-    public TextField getSearchFrd() {
-        return searchFrd;
-    }
-
-    public void setSearchFrd(TextField searchFrd) {
-        this.searchFrd = searchFrd;
+    public void setShowTeamList(ListView<?> showTeamList) {
+        this.showTeamList = showTeamList;
     }
 
     public Tab getToChat() {
@@ -169,34 +146,40 @@ public class MainController implements Initializable {
         this.toChat = toChat;
     }
 
-    public ListView<?> getShowFriendList() {
-        return showFriendList;
+    public Button getAddTeam() {
+        return addTeam;
     }
 
-    public void setShowFriendList(ListView<?> showFriendList) {
-        this.showFriendList = showFriendList;
+    public void setAddTeam(Button addTeam) {
+        this.addTeam = addTeam;
     }
 
-    public com.planett.learnt.java.controller.createTeamController getCreateTeamController() {
+    public BorderPane getChatHomePane() {
+        return chatHomePane;
+    }
+
+    public void setChatHomePane(BorderPane chatHomePane) {
+        this.chatHomePane = chatHomePane;
+    }
+
+    public CreateTeamController getCreateTeamController() {
         return createTeamController;
     }
 
-    public void setCreateTeamController(com.planett.learnt.java.controller.createTeamController createTeamController) {
+    public void setCreateTeamController(CreateTeamController createTeamController) {
         this.createTeamController = createTeamController;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public ChatPageController getChatPageController() {
+        return chatPageController;
     }
 
-    public VBox getShowChatMain_vbox() {
-        return showChatMain_vbox;
+    public void setChatPageController(ChatPageController chatPageController) {
+        this.chatPageController = chatPageController;
     }
 
-    public void setShowChatMain_vbox(VBox showChatMain_vbox) {
-        this.showChatMain_vbox = showChatMain_vbox;
-    }
+
+
 
     public Pane getShowPane() {
         return showPane;
@@ -205,4 +188,6 @@ public class MainController implements Initializable {
     public void setShowPane(Pane showPane) {
         this.showPane = showPane;
     }
+
+
 }

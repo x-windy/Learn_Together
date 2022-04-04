@@ -78,14 +78,15 @@ public class RegisterController {
         String phoneNumber = phoneNumber_TextField.getText();
         String password = passwordConfirm_TextField.getText();
         System.out.println("注册");
-        if (codeInput_TextField.getText() == "FFBB"){
+        if (codeInput_TextField.getText().equals("FFBB")){
             codeConfirm_hint.setText("");
-            if (JdbcUtil.register(userName,phoneNumber,password)){
+            if (JdbcUtil.register(userName,password,phoneNumber)){
                 System.out.println("注册成功");
             }else {
                 System.out.println("注册失败");
             }
         }else {
+            System.out.println(codeInput_TextField.getText());
             codeConfirm_hint.setText("验证码错误！");
         }
 

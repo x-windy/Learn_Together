@@ -14,6 +14,7 @@
         <tabs>
           <Tab fx:id="toHome" text="首页" />
           <Tab fx:id="toChat" text="聊天">
+
                <content>
                   <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
@@ -82,58 +83,30 @@
                                     </ScrollPane>
                                  </items>
                               </SplitPane>
+                               
                               <Pane fx:id="showPane">
+
                                  <children>
-                                    <VBox fx:id="showChatMain_vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1076.0">
-                                       <children>
-                                          <FlowPane maxWidth="1.7976931348623157E308">
-                                             <children>
-                                                <ToolBar prefHeight="25.0" prefWidth="1076.0" />
-                                             </children>
-                                          </FlowPane>
-                                          <Separator prefHeight="0.0" prefWidth="1034.0" />
-                                          <TabPane fx:id="chatTab_pane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-                                              <tabs>
-                                              <Tab text="聊天">
-                                                <content>
-                                                  <AnchorPane>
-                                                         <children>
-                                                            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                               <children>
-                                                                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER" VBox.vgrow="ALWAYS" />
-                                                                  <Separator />
-                                                                  <TextArea fx:id="inputMessage_text" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="输入新的消息" wrapText="true">
-                                                                     <font>
-                                                                        <Font size="18.0" />
-                                                                     </font>
-                                                                  </TextArea>
-                                                                  <Separator />
-                                                                  <Button fx:id="send_btn" mnemonicParsing="false" text="发送" />
-                                                               </children>
-                                                            </VBox>
-                                                         </children>
-                                                      </AnchorPane>
-                                                </content>
-                                              </Tab>
-                                              <Tab text="文件">
-                                                <content>
-                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                                </content>
-                                              </Tab>
-                                                <Tab text="图片">
-                                                   <content>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                                   </content>
-                                                </Tab>
-                                                <Tab text="任务">
-                                                   <content>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                                   </content>
-                                                </Tab>
-                                            </tabs>
-                                          </TabPane>
-                                       </children>
-                                    </VBox>
+                                     <fx:include fx:id="chatPage" source="chatPage.fxml" visible="false"/>
+                                     <fx:include fx:id="createTeam" source="createTeamPage.fxml" visible="false"/>
+                                    <BorderPane fx:id="chatHomePane" layoutX="285.0" layoutY="124.0" prefHeight="508.0" prefWidth="542.0">
+                                       <left>
+                                          <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="新建群组" BorderPane.alignment="CENTER" />
+                                       </left>
+                                       <center>
+                                          <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="添加朋友" BorderPane.alignment="CENTER" />
+                                       </center>
+                                       <right>
+                                          <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="邀请朋友" BorderPane.alignment="CENTER" />
+                                       </right>
+                                       <top>
+                                          <Label text="欢迎使用Learn Together" BorderPane.alignment="CENTER">
+                                             <font>
+                                                <Font size="22.0" />
+                                             </font>
+                                          </Label>
+                                       </top>
+                                    </BorderPane>
                                  </children>
                               </Pane>
                            </items>

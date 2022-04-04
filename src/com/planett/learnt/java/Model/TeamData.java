@@ -6,12 +6,21 @@ public class TeamData {
     private String teamId;
     private String teamName;
     private String teamInformation;
-    private ArrayList<UserData> teamMember;
+    private String teamCreator;
+    private ArrayList<String> teamMember;
     public TeamData(){
+        teamMember = new ArrayList<String>();
     }
-    public TeamData(String teamId,String teamName){
+    public TeamData(String teamId,String teamName,String teamCreator){
         this.teamId = teamId;
         this.teamName = teamName;
+        this.teamCreator = teamCreator;
+    }
+    public TeamData(String teamId,String teamName,String teamCreator,String teamMember){
+        this.teamId = teamId;
+        this.teamName = teamName;
+        this.teamCreator = teamCreator;
+        this.teamMember.add(teamMember);
     }
 
     public String getTeamId() {
@@ -38,11 +47,19 @@ public class TeamData {
         this.teamInformation = teamInformation;
     }
 
-    public ArrayList<UserData> getTeamMember() {
+    public ArrayList<String> getTeamMember() {
         return teamMember;
     }
 
-    public void setTeamMember(ArrayList<UserData> teamMember) {
+    public void setTeamMember(ArrayList<String> teamMember) {
         this.teamMember = teamMember;
+    }
+
+    public String getTeamCreator() {
+        return teamCreator;
+    }
+
+    public void setTeamCreator(String teamCreator) {
+        this.teamCreator = teamCreator;
     }
 }

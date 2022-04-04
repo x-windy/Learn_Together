@@ -90,8 +90,7 @@ public class LoginController {
         } else {
             try {
                 // 连接数据库，检查账号是否正确
-                // “!”验证失败测试主界面
-                if (!JdbcUtil.validate(account_TextField.getText(), password_TextField.getText())) {
+                if (JdbcUtil.validate(account_TextField.getText(), password_TextField.getText())) {
                     message.setText("登录成功！");
                     // 创建一个user实例
                     // User user = new User(account_TextField.getText(),password_TextField.getText());
