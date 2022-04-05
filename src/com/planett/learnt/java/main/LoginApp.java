@@ -1,6 +1,7 @@
 package com.planett.learnt.java.main;
 
 import com.planett.learnt.java.controller.LoginController;
+import com.planett.learnt.java.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,7 +29,10 @@ public class LoginApp extends Application {
 
         // 获取Controller实例
         LoginController loginController = fxmlLoader.getController();
-
+//        fxmlLoader.setLocation(getClass().getResource("/com/planett/learnt/View/fxml/mainScene.fxml"));
+//
+//        MainController mainController = fxmlLoader.getController();
+//
 
     }
 

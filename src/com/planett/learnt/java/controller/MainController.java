@@ -52,6 +52,10 @@ public class MainController implements Initializable {
     @FXML
     private Pane showPane;
 
+    @FXML
+    private Label showInformation_label;
+
+
     // 创建班组页面
     @FXML
     private CreateTeamController createTeamController;
@@ -190,4 +194,11 @@ public class MainController implements Initializable {
     }
 
 
+    public Label getShowInformation_label() {
+        return showInformation_label;
+    }
+
+    public void setShowInformation_label(Label showInformation_label) {
+        this.showInformation_label = showInformation_label;
+    }
 }

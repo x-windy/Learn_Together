@@ -70,6 +70,31 @@ public class JdbcUtil {
         }
     }
     /*
+    * 获取登录用户资料
+    * */
+    public static UserData getUserData(String account) throws SQLException {
+        UserData userData = UserData.getCurrentAccount();
+        String sql = "SELECT uid,userName,userPassword,phoneNumber,onlineStatus,accountStatus,createTime,frdListID from t_user where account= ?";
+        preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setString(1,account);
+        rs = preparedStatement.executeQuery();
+        while (rs.next()){
+            userData.setAccount(account);
+            userData.setUid(rs.getString("uid"));
+            userData.setUserPassword(rs.getString("userPassword"));
+            userData.setPhoneNumber(rs.getString("phoneNumber"));
+            userData.setUserName(rs.getString("userName"));
+            userData.setAccountStatus(rs.getString("accountStatus"));
+            userData.setOnlineStatus(rs.getString("onlineStatus"));
+            userData.setFrdDataListID(rs.getString("frdListID"));
+            userData.setCreateDate(rs.getDate("createTime"));
+        }
+        return userData;
+    }
+    /*
+    * 用户
+    * */
+    /*
     * 创建班组
     * */
     public static boolean createTeam(String teamID,String teamName,String creator) throws ClassNotFoundException, SQLException {
@@ -148,7 +173,7 @@ public class JdbcUtil {
         return false;
     }
     /*
-    * 登录账号
+    * 验证登录账号
     * */
     public static boolean validate(String account,String userPassword) throws ClassNotFoundException, SQLException {
             System.out.println(conn);
@@ -170,13 +195,17 @@ public class JdbcUtil {
     public static boolean register(String account,String userPassword,String phoneNumber) throws ClassNotFoundException, SQLException {
         System.out.println(conn);
         String uid = UUID.randomUUID().toString();
-        String sql= "insert into t_user(uid,account,userPassword,phoneNumber,createTime,rid) values(?,?,?,?,now(),?)";
+        String frdListID = UUID.randomUUID().toString().substring(0,5);
+        String userName = "用户" + UUID.randomUUID().toString().substring(0,5);
+        String sql= "insert into t_user(uid,account,userPassword,phoneNumber,createTime,rid,frdListID,userName) values(?,?,?,?,now(),?,?,?)";
         preparedStatement = conn.prepareStatement(sql);
         preparedStatement.setString(1,uid);
         preparedStatement.setString(2,account);
         preparedStatement.setString(3,userPassword);
         preparedStatement.setString(4,phoneNumber);
         preparedStatement.setString(5,"1");
+        preparedStatement.setString(6,frdListID);
+        preparedStatement.setString(7,userName);
         System.out.println(preparedStatement);
         if (preparedStatement.executeUpdate()==1){
             return true;

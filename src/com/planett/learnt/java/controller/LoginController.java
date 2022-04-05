@@ -95,9 +95,13 @@ public class LoginController {
                     // 创建一个user实例
                     // User user = new User(account_TextField.getText(),password_TextField.getText());
                     // getCurrentAccount
-                    UserData currentAccount = UserData.getCurrentAccount();
-                    currentAccount.setAccount(account_TextField.getText());
-                    currentAccount.setUserPassword(password_TextField.getText());
+                    // UserData currentAccount = UserData.getCurrentAccount();
+
+                    // 从数据库中获取账号信息
+                    UserData currentAccount = JdbcUtil.getUserData(account_TextField.getText());
+//                    currentAccount.setAccount(account_TextField.getText());
+//                    currentAccount.setUserPassword(password_TextField.getText());
+
                     saveAccount(isRemember);
 
                     // 关闭当前窗口

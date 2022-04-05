@@ -17,6 +17,8 @@ public class UserData {
     // 当前登录的账号
     private static UserData currentAccount = new UserData();
 
+    // 列表ID
+    private String frdDataListID;
     // 保存好友数据
     private ArrayList<FrdData> frdDataList;
 
@@ -45,6 +47,14 @@ public class UserData {
     // 获取当前登录的账号
     public static UserData getCurrentAccount(){
         return currentAccount;
+    }
+
+    public String getFrdDataListID() {
+        return frdDataListID;
+    }
+
+    public void setFrdDataListID(String frdDataListID) {
+        this.frdDataListID = frdDataListID;
     }
 
     public ArrayList<FrdData> getFrdDataList() {

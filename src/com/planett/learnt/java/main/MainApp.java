@@ -33,6 +33,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+
         // 加载fxml文件
         fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/com/planett/learnt/View/fxml/mainScene.fxml"));
@@ -54,6 +55,9 @@ public class MainApp extends Application {
         // 设置listView的observable
         mainController.getShowFriendList().setItems(observableList_friendList);
         mainController.getShowTeamList().setItems(observableList_teamList);
+
+        // 初始化窗口
+        initMain();
 
         // 添加好友事件
         mainController.getAddFrd().setOnAction(event -> {
@@ -180,6 +184,12 @@ public class MainApp extends Application {
         });
 
 
+    }
+
+    // 初始化窗口
+    public void initMain(){
+        UserData userData = UserData.getCurrentAccount();
+        mainController.getShowInformation_label().setText(userData.getUserName());
     }
 
 }
