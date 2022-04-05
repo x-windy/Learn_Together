@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="createTeam_page" prefHeight="534.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.CreateTeamController">
+<AnchorPane fx:id="createTeam_page" prefHeight="534.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.CreateJoinTeamController">
    <children>
       <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="62.0" prefWidth="128.0" text="创建新班组">
          <font>
@@ -29,6 +29,6 @@
       </ScrollPane>
       <Button fx:id="createTeam_btn" layoutX="50.0" layoutY="440.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="创建班组" />
       <Button fx:id="cancelCreateTeam_btn" layoutX="361.0" layoutY="440.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="取消" />
-      <Button fx:id="joinTeam_btn" layoutX="531.0" layoutY="32.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" text="加入群组" />
+      <Button fx:id="toJoinTeam_btn" layoutX="531.0" layoutY="32.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" text="加入群组" />
    </children>
 </AnchorPane>

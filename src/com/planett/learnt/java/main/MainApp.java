@@ -4,15 +4,20 @@ import com.planett.learnt.java.Model.FrdData;
 import com.planett.learnt.java.Model.TeamData;
 import com.planett.learnt.java.Model.UserData;
 import com.planett.learnt.java.Util.JdbcUtil;
+import com.planett.learnt.java.controller.ChatPageController;
 import com.planett.learnt.java.controller.MainController;
-import com.planett.learnt.java.controller.CreateTeamController;
+import com.planett.learnt.java.controller.CreateJoinTeamController;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,7 +29,9 @@ public class MainApp extends Application {
     FriendListItem friendListItem = new FriendListItem();
 
     MainController mainController;
-    CreateTeamController createTeamController;
+    CreateJoinTeamController createJoinTeamController;
+    CreateJoinTeamController joinTeamController;
+    ChatPageController chatPageController;
 
     ObservableList observableList_friendList;
     ObservableList observableList_teamList;
@@ -42,8 +49,9 @@ public class MainApp extends Application {
 
         // 获取controller
         mainController = fxmlLoader.getController();
-
-        createTeamController = mainController.getCreateTeamController();
+        createJoinTeamController = mainController.getCreateTeamController();
+        joinTeamController = mainController.getJoinTeamController();
+        chatPageController = mainController.getChatPageController();
 
         mainController.getShowFriendList().setPlaceholder(new Label("没有好友"));
         mainController.getShowTeamList().setPlaceholder(new Label("班组为空"));
@@ -139,20 +147,21 @@ public class MainApp extends Application {
     // 添加班组实现
     public void  addTeam() throws IOException {
         System.out.println("添加班组");
-        System.out.println(  mainController.getCreateTeamController().getCreateTeamName_tf());
+//        System.out.println(  mainController.getCreateTeamController().getCreateTeamName_tf());
         mainController.getChatHomePane().setVisible(false);
+        closeMainChatPage();
         // 显示创建班组页面
 //        mainController.getShowPane().getChildren().add(createTeamLoader.load());
 //        mainController.getShowPane().getChildren().add(createTeamController.getCreateTeam_page());
-        createTeamController.getCreateTeam_page().setVisible(true);
+        createJoinTeamController.getCreateTeam_page().setVisible(true);
         // 添加群组按钮
 
         mainController.getCreateTeamController().getCreateTeam_btn().setOnAction(event -> {
             System.out.println("点击了添加群组");
-            if (  createTeamController.getCreateTeamName_tf().getText()!="" &&  createTeamController.getInviteFriend_tf().getText()!=""){
+            if (  createJoinTeamController.getCreateTeamName_tf().getText()!="" &&  createJoinTeamController.getInviteFriend_tf().getText()!=""){
                 String teamId = UUID.randomUUID().toString().substring(0,5);
                 // 创建班组实例
-                TeamData teamData = new TeamData(teamId, createTeamController.getCreateTeamName_tf().getText(), UserData.getCurrentAccount().getAccount());
+                TeamData teamData = new TeamData(teamId, createJoinTeamController.getCreateTeamName_tf().getText(), UserData.getCurrentAccount().getAccount());
                 // 添加信息到数据库
                 try {
                     JdbcUtil.createTeam(teamData.getTeamId(),teamData.getTeamName(),teamData.getTeamCreator());
@@ -163,15 +172,15 @@ public class MainApp extends Application {
                 }
 
                 // 添加群组列表成员
-                observableList_teamList.add(new Label(teamData.getTeamName()));
+                observableList_teamList.add(new TeamListItem(teamData.getTeamName()).getBorderPane());
 
-            }else if (createTeamController.getCreateTeamName_tf().getText()!="" ){
+            }else if (createJoinTeamController.getCreateTeamName_tf().getText()!="" ){
                 String teamId = UUID.randomUUID().toString().substring(0,5);
                 // 创建班组实例
-                TeamData teamData = new TeamData(teamId, createTeamController.getCreateTeamName_tf().getText(),UserData.getCurrentAccount().getAccount(), createTeamController.getInviteFriend_tf().getText());
+                TeamData teamData = new TeamData(teamId, createJoinTeamController.getCreateTeamName_tf().getText(),UserData.getCurrentAccount().getAccount(), createJoinTeamController.getInviteFriend_tf().getText());
                 // 添加信息到数据库
                 try {
-                    JdbcUtil.inviteToTeam(teamId, createTeamController.getCreateTeamName_tf().getText());
+                    JdbcUtil.inviteToTeam(teamId, createJoinTeamController.getCreateTeamName_tf().getText());
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } catch (SQLException e) {
@@ -185,11 +194,60 @@ public class MainApp extends Application {
 
 
     }
+    // 切换到搜索班组
+    public void toJoinTeam(){
+        createJoinTeamController.getToJoinTeam_btn().setOnAction(event -> {
+            createJoinTeamController.getCreateTeam_page().setVisible(false);
+            joinTeamController.getJoinTeam_page().setVisible(true);
+
+        });
+    }
+    // 切换到创建群组
+    public void toCreateTeam(){
+        joinTeamController.getToSearchTeam_btn().setOnAction(event -> {
+            joinTeamController.getJoinTeam_page().setVisible(false);
+            createJoinTeamController.getCreateTeam_page().setVisible(true);
+        });
+    }
+
+    // 选择班组进行进行聊天
+    public void toChatPage() {
+        System.out.println("点击");
+        mainController.getShowTeamList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
+            @Override
+            public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+                System.out.println(newValue);
+                closeMainChatPage();
+                if ( !chatPageController.getShowChatMain_Page().isVisible())
+                chatPageController.getShowChatMain_Page().setVisible(true);
+
+                BorderPane borderPane = (BorderPane) newValue;
+                Label teamName = (Label)borderPane.getTop();
+                chatPageController.getShowChatItem().getItems().add(borderPane);
+                System.out.println(teamName.getText());
+
+            }
+        });
+    }
+
+    // 关闭MainChat所有窗口
+    public void closeMainChatPage(){
+        if (mainController.getChatHomePane().isVisible() ){
+            mainController.getChatHomePane().setVisible(false);
+        }else if (createJoinTeamController.getCreateTeam_page().isVisible()){
+            createJoinTeamController.getCreateTeam_page().setVisible(false);
+        }else if ( joinTeamController.getJoinTeam_page().isVisible()){
+            joinTeamController.getJoinTeam_page().setVisible(false);
+        }
+    }
 
     // 初始化窗口
     public void initMain(){
         UserData userData = UserData.getCurrentAccount();
         mainController.getShowInformation_label().setText(userData.getUserName());
+        toCreateTeam();
+        toJoinTeam();
+        toChatPage();
     }
 
 }

@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.planett.learnt.java.controller.joinTeamController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="joinTeam_page" prefHeight="534.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.CreateJoinTeamController">
+   <children>
+      <Label layoutX="25.0" layoutY="22.0" prefHeight="62.0" prefWidth="128.0" text="搜索班组" AnchorPane.bottomAnchor="458.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="508.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Button fx:id="toSearchTeam_btn" layoutX="541.0" layoutY="42.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" text="加入群组" />
+      <TextField fx:id="searchTeam_tf" layoutX="62.0" layoutY="109.0" prefHeight="50.0" prefWidth="519.0" />
+   </children>
 </AnchorPane>

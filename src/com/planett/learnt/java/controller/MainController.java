@@ -4,10 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,7 +26,7 @@ public class MainController implements Initializable {
 
 
     @FXML
-    private ListView<?> showFriendList;
+    private ListView<BorderPane> showFriendList;
 
     @FXML
     private Tab toActivity;
@@ -58,10 +56,13 @@ public class MainController implements Initializable {
 
     // 创建班组页面
     @FXML
-    private CreateTeamController createTeamController;
+    private CreateJoinTeamController createTeamController;
+
     @FXML
     private ChatPageController chatPageController;
 
+    @FXML
+    private CreateJoinTeamController joinTeamController;
 
     @FXML
     void toHome(ActionEvent event) {
@@ -77,6 +78,13 @@ public class MainController implements Initializable {
 
     }
 
+    public CreateJoinTeamController getJoinTeamController() {
+        return joinTeamController;
+    }
+
+    public void setJoinTeamController(CreateJoinTeamController joinTeamController) {
+        this.joinTeamController = joinTeamController;
+    }
 
     public Button getAddFrd() {
         return addFrd;
@@ -114,7 +122,7 @@ public class MainController implements Initializable {
         return showFriendList;
     }
 
-    public void setShowFriendList(ListView<?> showFriendList) {
+    public void setShowFriendList(ListView<BorderPane> showFriendList) {
         this.showFriendList = showFriendList;
     }
 
@@ -166,12 +174,12 @@ public class MainController implements Initializable {
         this.chatHomePane = chatHomePane;
     }
 
-    public CreateTeamController getCreateTeamController() {
+    public CreateJoinTeamController getCreateTeamController() {
         return createTeamController;
     }
 
-    public void setCreateTeamController(CreateTeamController createTeamController) {
-        this.createTeamController = createTeamController;
+    public void setCreateTeamController(CreateJoinTeamController createJoinTeamController) {
+        this.createTeamController = createJoinTeamController;
     }
 
     public ChatPageController getChatPageController() {

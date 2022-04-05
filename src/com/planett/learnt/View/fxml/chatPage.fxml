@@ -7,38 +7,50 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="595.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.ChatPageController">
+<AnchorPane fx:id="showChatMain_Page" prefHeight="595.0" prefWidth="600.0" stylesheets="@/com/planett/learnt/View/css/chatPage.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planett.learnt.java.controller.ChatPageController">
    <children>
-      <VBox fx:id="showChatMain_vbox" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1076.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="595.0" prefWidth="1076.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <FlowPane maxWidth="1.7976931348623157E308">
                <children>
-                  <ToolBar prefHeight="25.0" prefWidth="1076.0" />
+                  <ToolBar fx:id="showChatItem" prefHeight="25.0" prefWidth="936.0" />
                </children>
             </FlowPane>
-            <Separator />
             <TabPane fx:id="chatTab_pane" tabClosingPolicy="UNAVAILABLE">
                <tabs>
                   <Tab text="聊天">
                      <content>
-                        <AnchorPane>
+                        <AnchorPane prefHeight="549.0" prefWidth="921.0">
                            <children>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="538.0" prefWidth="602.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="474.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="322.0" prefWidth="1076.0" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="471.0" prefWidth="602.0" vbarPolicy="NEVER">
                                        <content>
-                                          <ListView prefHeight="235.0" prefWidth="1074.0" />
+                                          <ListView prefHeight="445.0" prefWidth="599.0" />
                                        </content>
                                     </ScrollPane>
-                                    <TextArea fx:id="inputMessage_text" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="输入新的消息" wrapText="true">
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="462.0" prefHeight="470.0" prefWidth="154.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="44.0" prefWidth="154.0">
+                                       <children>
+                                          <TextField promptText="按名字搜索" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="班组成员（" />
+                                 </children>
+                              </VBox>
+                              <HBox layoutY="478.0" prefHeight="46.0" prefWidth="713.0">
+                                 <children>
+                                    <TextArea fx:id="inputMessage_text" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="539.0" promptText="输入新的消息" wrapText="true">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </TextArea>
                                     <Button fx:id="send_btn" mnemonicParsing="false" text="发送" />
                                  </children>
-                              </VBox>
+                              </HBox>
                            </children>
                         </AnchorPane>
                      </content>

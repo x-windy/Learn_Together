@@ -94,6 +94,7 @@
                                  <children>
                                      <fx:include fx:id="chatPage" source="chatPage.fxml" visible="false" />
                                      <fx:include fx:id="createTeam" source="createTeamPage.fxml" visible="false" />
+                                    <fx:include fx:id="joinTeam" source="joinTeamPage.fxml" visible="false" />
                                     <BorderPane fx:id="chatHomePane" layoutX="190.0" layoutY="109.0" prefHeight="508.0" prefWidth="542.0">
                                        <left>
                                           <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="新建群组" BorderPane.alignment="CENTER" />
